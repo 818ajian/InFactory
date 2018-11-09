@@ -295,6 +295,16 @@ public class Convert2FeatureClass {
 		CellSpaceBoundaryGeometryType cellSpaceBoundaryGeom = feature.getCellSpaceBoundaryGeometry();
 		if (cellSpaceBoundaryGeom != null) {
 			change2FeatureClass(savedMap, feature.getId(), cellSpaceBoundaryGeom);
+			if(cellSpaceBoundaryGeom.isSetGeometry2D()){
+				LineString geom = Convert2JTSGeometry.convert2LineString((LineStringType)feature.getCellSpaceBoundaryGeometry().getGeometry2D().getAbstractCurve().getValue());
+				GeometryUtil.setMetadata(geom, "id", feature.getCellSpaceBoundaryGeometry().getGeometry2D().getAbstractCurve().getValue().getId());
+				newFeature.setGeometry(geom);
+			}
+			else if(cellSpaceBoundaryGeom.isSetGeometry3D()){
+				Polygon geom = Convert2JTSGeometry.convert2Polygon((PolygonType)feature.getCellSpaceBoundaryGeometry().getGeometry3D().getAbstractSurface().getValue());
+				GeometryUtil.setMetadata(geom, "id", feature.getCellSpaceBoundaryGeometry().getGeometry3D().getAbstractSurface().getValue().getId());
+				newFeature.setGeometry(geom);
+			}
 		} else {
 			//TODO : Exception
 			System.out.println("Converter : There is no Geometry Information");
