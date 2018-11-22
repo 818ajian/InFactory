@@ -19,7 +19,7 @@ import java.util.HashSet;
  * Created by STEM_KTH on 2018-11-03.
  * @author Taehoon Kim, Pusan National University, STEM Lab.
  */
-public class IndoorUtils {
+public class CommonIndoorUtils {
     public static final int BUFFER_SIZE = 20;
     public static final int EPSILON = 5;
     private static final GeometryFactory gf = new GeometryFactory();
