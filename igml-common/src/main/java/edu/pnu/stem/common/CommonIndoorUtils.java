@@ -445,7 +445,9 @@ public class CommonIndoorUtils {
             Polygon cellGeometry = cellSpace.getFloorGeometry();
             closestCellIndex++;
             if(cellGeometry.intersects(bufferedPolygon)){
-                resultWithArea.put(closestCellIndex, cellGeometry.intersection(bufferedPolygon).getArea());
+                if(cellGeometry.getCoordinate().equalInZ(point.getCoordinate(), 0.1)) {
+                    resultWithArea.put(closestCellIndex, cellGeometry.intersection(bufferedPolygon).getArea());
+                }
             }
         }
 
